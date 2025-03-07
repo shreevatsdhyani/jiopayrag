@@ -21,6 +21,14 @@ type Message = {
   }>;
 };
 
+type Source ={
+  section_title: string;
+  source_url: string;
+  content?: string;
+  url:string;
+}
+
+
 export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -73,7 +81,7 @@ export default function ChatPage() {
           id: Date.now().toString(),
           role: "assistant",
           content: data.response,
-          sources: data.sources?.map((source: any) => ({
+          sources: data.sources?.map((source: Source) => ({
             title: source.section_title,
             url: source.source_url,
             content: source.content || "", // Add content if available
