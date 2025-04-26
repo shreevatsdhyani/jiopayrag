@@ -1,4 +1,5 @@
 https://jiopaychatbot.vercel.app/
+
 ```markdown
 # JioPay AI Chatbot - Full Stack RAG System
 
@@ -112,3 +113,4 @@ vercel logs
 # Backend logs
 journalctl -u jiopay-backend -f
 ```
+![image](https://github.com/user-attachments/assets/92275579-d83f-4a7e-a8dc-6cb01ee26429)
