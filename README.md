@@ -113,4 +113,5 @@ vercel logs
 # Backend logs
 journalctl -u jiopay-backend -f
 ```
-![image](https://github.com/user-attachments/assets/92275579-d83f-4a7e-a8dc-6cb01ee26429)
+![image](https://github.com/user-attachments/assets/92275579-d83f-4a7e-a8dc-6cb01ee26429)  ![image](https://github.com/user-attachments/assets/2f8f024d-5a56-487f-a6b9-135b2343012c)
+
