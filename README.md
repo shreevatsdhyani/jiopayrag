@@ -1,39 +1,113 @@
-https://jiopaychatbot.vercel.app/
+```markdown
+# JioPay AI Chatbot - Full Stack RAG System
 
+*Next.js + FastAPI Retrieval-Augmented Generation Chatbot*
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🌟 Features
+- **AI-Powered Q&A** using LLaMA-3-8B via Groq
+- **Document Retrieval** from JioPay knowledge base
+- **Source Citation** with clickable references
+- **Responsive UI** with Vercel Geist design
+- **AWS EC2** backend with load balancing
 
-## Getting Started
+## 🛠 Tech Stack
+**Frontend**:
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Vercel Hosting
 
-First, run the development server:
+**Backend**:
+- FastAPI (Python)
+- FAISS Vector DB
+- HuggingFace Embeddings
+- AWS EC2 Deployment
 
+## 📂 Repository Structure
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+├── frontend/                  # Next.js application
+│   ├── app/
+│   │   ├── layout.tsx         # Root layout
+│   │   └── page.tsx           # Chat interface
+│   ├── components/
+│   │   ├── ui/                # ShadCN components
+│   │   │   ├── button.tsx
+│   │   │   └── card.tsx
+│   │   └── chat/              # Chat components
+│   │       ├── Input.tsx
+│   │       └── Messages.tsx
+│   ├── lib/
+│   │   ├── api.ts             # API client
+│   │   └── constants.ts       # App constants
+│   ├── public/                # Static assets
+│   │   ├── images/
+│   │   └── fonts/
+│   ├── styles/                # Global styles
+│   │   └── globals.css
+│   ├── .env.local             # Frontend env vars
+│   └── next.config.mjs        # Next.js config
+│
+├── backend/                   # FastAPI service
+│   ├── jiopay_index/          # Vector database
+│   │   ├── index.faiss
+│   │   └── index.pkl
+│   ├── main.py                # API endpoints
+│   ├── scraper/               # Data ingestion
+│   │   └── jiopay_scraper.py
+│   ├── requirements.txt       # Python dependencies
+│   └── .env                   # Backend secrets
+│
+├── .github/                   # CI/CD workflows
+│   └── workflows/
+│       ├── frontend.yml
+│       └── backend.yml
+│
+├── docs/                      # Documentation
+│   ├── ARCHITECTURE.md
+│   └── API_REFERENCE.md
+│
+├── .gitignore
+├── LICENSE
+└── README.md                  # This file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend (Vercel)
+```bash
+cd frontend
+npm install
+vercel --prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Backend (AWS EC2)
+```bash
+cd backend
+python -m pip install -r requirements.txt
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
+```
 
-## Learn More
+## 🔌 API Endpoints
+**POST /query**
+```json
+{
+  "query": "How to check JioPay balance?"
+}
+```
+**Response:**
+```json
+{
+  "answer": "You can check balance by...",
+  "sources": ["https://jiopay.com/balance"]
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📊 Monitoring
+```bash
+# Frontend logs
+vercel logs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Backend logs
+journalctl -u jiopay-backend -f
+```
